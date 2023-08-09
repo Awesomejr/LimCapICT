@@ -1,0 +1,45 @@
+{% load static %}
+<style>
+    .topButton {
+        background-color: rgb(3, 109, 3);
+        display: none;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        padding: .7em;
+        margin: 2em;
+        border-radius: 10px;
+        
+    }
+</style>
+<button id="scrollToTopButton" class="topButton">
+    <a href="{% url 'base:home' %}">
+        <img src="{% static './images/upload_7321689.png' %}" alt="none" width="40">
+    </a>
+</button>
+
+<script>
+    let topButton = document.querySelector(".topButton");
+    let scrollToTopButton = document.getElementById("scrollToTopButton");
+
+    function checkScrollPosition(){
+        if (window.scrollY > 500){
+            <!-- alert("heloo"); -->
+            topButton.style.display = "block";
+        }else {
+            topButton.style.display = "none";
+        };
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth" // Use smooth scrolling behavior
+        });
+    
+    };
+
+};
+
+    window.addEventListener("scroll", checkScrollPosition);
+    scrollToTopButton.addEventListener("click", scrollToTop);
+</script>

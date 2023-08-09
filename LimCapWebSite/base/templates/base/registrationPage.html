@@ -1,0 +1,102 @@
+{% extends "main.html" %}
+{% block title %} LimCap ICT | Registration {% endblock title %}
+
+{% block content %}
+{% include "flashMessage.html" %}
+<main class="min-h-fit md:h-full bg-cover bg-center bg-no-repeat pt-24 md:pt-5 pb-5"  style="background-image: url(../../static/images/pexels-alex-knight-2599244.jpg)">
+    <div class="bg-lightBlack container mx-auto w-4/5 md:w-4/5 flex flex-col space-y-4 px-8 md:px-10 pb-8 pt-4 md:pt-0 mb-36 lg:mb-0 md:mb-0 mt-6 md:mt-16 lg:mt-1 lg:pt-3 rounded-2xl">
+        <div class="text-white text-3xl font-extrabold text-center">
+            <h2>Registration</h2>
+        </div>
+        <form role="form" action="" method="post" enctype="multipart/form-data" class="container mx-auto flex flex-col md:grid md:grid-cols-2 gap-x-20 gap-y-3">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="{{ form.first_name.id_for_label }}" class="block text-white">{{form.first_name.label}} <span class="text-brightRed">*</span> </label>
+                {{ form.first_name }}
+            </div>
+            <div class="mb-4">
+                <label for="{{ form.last_name.id_for_label }}" class="block text-white">{{form.last_name.label}} <span class="text-brightRed">*</span></label>
+                {{ form.last_name }}
+            </div>
+            <div class="mb-4">
+                <label for="{{ form.gender.id_forlabel }}" class="block text-white">{{form.gender.label}} <span class="text-brightRed">*</span></label>
+                {{ form.gender }}
+            </div>
+            <div class="mb-4">
+                <label for="{{ form.course.id_forlabel }}" class="block text-white">{{form.course.label}} <span class="text-brightRed">*</span></label>
+                <input type="" name="course" list="course-list" class="form-select" style="min-width: 80%;">
+                <datalist id="course-list">
+                    <select>
+                        {% for course in courses %}
+                        <option value="{{ course }}">{{ course }} </option>
+                        {% endfor %}
+                    </select>
+                </datalist>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 md:gap-8">
+                <div class="">
+                    <label for="{{ form.countryCode.id_for_label }}" class="block w-10 text-white">{{form.countryCode.label}}</label>
+                    {{ form.countryCode }}
+                </div>
+                <div class="md:-ml-16 lg:-ml-36 pr-20 w-full">
+                    <label for="{{ form.phoneNumber.id_for_label }}" class="block text-white">{{form.phoneNumber.label}} <span class="text-brightRed">*</span></label>
+                    {{ form.phoneNumber }}
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="{{ form.email.id_for_label }}" class="block text-white">{{form.email.label}} <span class="text-brightRed">*</span></label>
+                {{ form.email }}
+            </div>
+            <div class="mb-4">
+                <label for="{{ form.username.id_for_label }}" class="block text-white">{{form.username.label}} <span class="text-brightRed">*</span> </label>
+                {{ form.username }}
+            </div>
+            <div class="mb-4">
+                <label for="{{ form.password1.id_for_label }}" class="block text-white">{{form.password1.label}} <span class="text-brightRed">*</span> </label>
+                {{ form.password1 }}
+            </div>
+            <div class="mb-4">
+                <label for="{{ form.password2.id_for_label }}" class="block text-white">{{form.password2.label}} <span class="text-brightRed">*</span> </label>
+                {{ form.password2 }}
+            </div>
+            <div class="mb-4">
+                <label for="{{ form.avatar.id_for_label }}" class="block text-white">{{form.avatar.label}}</label>
+                {{ form.avatar }}
+            </div>
+            <div class="col-span-2 mb-4 flex justify-center" style="min-width: 100%; ">
+                <input type="submit" value="Submit" class=" bg-myBlue text-white font-serif font-bold text-2xl rounded-lg md:rounded-xl py-3 px-10 self-center hover:opacity-80 hover:cursor-pointer bg-from-gray-900">
+            </div>
+        </form>
+        <p class="text-amber-400 text-xl text-center self-center">Already have an account? <a href="{% url 'base:loginPage' %}" class="text-white">Login</a></p>
+    </div>
+</main>
+{% endblock content %}
+
+
+<!--<input type="text" name="firstName" id="" placeholder="First Name..." class="form-input text-xl">-->
+<!--            <input type="text" name="lastName" id="" placeholder="Last Name..." class="form-input text-xl">-->
+<!--            <div class="flex flex-row justify-between gap-4">-->
+<!--                <input name="gender" list="genders" placeholder="Gender..." class="form-select text-xl"/>-->
+<!--                <datalist role="list" id="genders">-->
+<!--                    <option value="Male"></option>-->
+<!--                    <option value="Female"></option>-->
+<!--                    <option value="Others"></option>-->
+<!--                </datalist>-->
+
+<!--                <input type="text" name="course" list="courses" placeholder="Select Course.." class="form-select w-3/4 text-xl"/>-->
+<!--                <datalist id="courses" role="list">-->
+<!--                    <option value="Web Development"></option>-->
+<!--                    <option value="Graphics Design"></option>-->
+<!--                    <option value="Machine Learning"></option>-->
+<!--                    <option value="Photography and Videography"></option>-->
+<!--                </datalist>-->
+<!--            </div>-->
+<!--            <div class="flex flex-row justify-between gap-4">-->
+<!--                <input type="text" value="+234" name="countryCode" class="form-input text-xl">-->
+<!--                <input type="tel" name="phoneNumber" id="" placeholder="Telphone..." class="form-input text-xl w-3/4">-->
+<!--            </div>-->
+<!--            <input type="email" name="country" id="" placeholder="Mail..." class="form-input text-xl">-->
+<!--            <input hidden type="text" name="role" id="" value="student" class="form-input text-xl">-->
+<!--            <input type="text" name="username" id="" placeholder="Username..." class="form-input text-xl">-->
+<!--            <input type="password" name="password" id="" placeholder="Password..." class="form-input text-xl">-->
+<!--            <input type="password" name="password2" id="" placeholder="Re-Enter Passowrd..." class="form-input text-xl">-->

@@ -1,0 +1,193 @@
+<!--<!DOCTYPE html>-->
+<!--{% load static tailwind_tags %}-->
+<!--{% load static %}-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>{% block title %} LimCap ICT | Home {% endblock title %}</title>-->
+<!--    <link rel="stylesheet" href="{% static './styles/index.css' %}">-->
+<!--    {% tailwind_css %}-->
+<!--</head>-->
+<!--<body>-->
+{% block header %}
+<!--<header class="w-full bg-black text-white flex content-baseline space-x-5 pt-9 px-4 pb-4 fixed top-0 left-0 z-10" style="min-height: 5vh;">-->
+<!--    <section class="container mx-auto flex justify-around space-x-7 md:space-x-3 md:mx-2">-->
+<!--        <div class="px-5 mx-4 md:mx-6">-->
+<!--            <a href="{% url 'base:home' %}" class="flex flex-row justify-around space-x-2 -mt-4">-->
+<!--                <img src="{% static './images/LimCapLogo2.png' %}" alt="logo" width="55" height="55">-->
+<!--                <h1 class="font-bold text-2xl mx-4 mt-2">LimCap</h1>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; navigation menus &ndash;&gt;-->
+<!--        <nav role="navigation" class="hidden md:block md:mx-4"  id="nav-bar">-->
+<!--            <ul class="md:flex flex-row justify-between space-x-8 md:mx-4">-->
+<!--                <li class="hover:text-orange-600 hover:text-lg transition-all ease-linear duration-300"><a-->
+<!--                        href="{% url 'base:home' %}">Home</a></li>-->
+<!--                <li class="hover:text-orange-600 hover:text-lg transition-all ease-linear duration-300"><a href="#">Services</a>-->
+<!--                </li>-->
+<!--                <li class="hover:text-orange-600 hover:text-lg transition-all ease-linear duration-300"><a href="#">Courses</a>-->
+<!--                </li>-->
+<!--                <li class="hover:text-orange-600 hover:text-lg transition-all ease-linear duration-300"><a href="#">StudyGroups</a>-->
+<!--                </li>-->
+<!--                <li class="hover:text-orange-600 hover:text-lg transition-all ease-linear duration-300"><a-->
+<!--                        href="{% url 'base:aboutPage' %}">About</a></li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--        <div class="flex flex-row justify-evenly space-x-6 mx-4 ml-4 md:mx-6">-->
+<!--            &lt;!&ndash; <a href="{% url 'base:home' %}" class="hidden md:flex bg-gradient-to-r from-amber-500 to-red-600 hover:from-amber-600 hover:to-red-700 mb-5 px-4 rounded-full">{{ request.user.username }}</a> &ndash;&gt;-->
+<!--            {% if request.user.is_authenticated %}-->
+<!--            <a href="{% url 'base:logout' %}" class="hidden md:flex text-amber-400">Logout</a>-->
+<!--            <div class="hidden md:flex flex-col justify-center items-center -mt-3 md:pb-4 pt-2  w-12 h-12">-->
+<!--                <a href="{% url 'base:profilePage' request.user.id %}" class="self-end"><img src="{{ request.user.avatar.url }}" alt="profile" width="32" height="32" class="w-4/5 md:w-1/2" style="border-radius: 20%;"></a>-->
+<!--                &lt;!&ndash; <a href="#" class="font-sans font-semibold text-sm">{{ request.user.username }}</a> &ndash;&gt;-->
+<!--            </div>-->
+<!--            {% else %}-->
+<!--            <a href="{% url 'base:loginPage' %}" class="hidden md:flex text-amber-400">Login</a>-->
+<!--            <div class="hidden md:flex flex-col justify-center items-center -mt-3 md:pb-4 pt-2  w-16">-->
+<!--                <a href="{% url 'base:profilePage' request.user.id %}" class="self-end"><img src="{% static './avatars/avatar.svg' %}" alt="profile" class="w-4/5 md:w-1/2" style="border-radius: 40%;"></a>-->
+<!--                &lt;!&ndash; <a href="#" class="font-sans font-semibold text-sm">{{ request.user.username }}</a> &ndash;&gt;-->
+<!--            </div>-->
+<!--            {% endif %}-->
+<!--        </div>-->
+<!--        &lt;!&ndash; hambugger button &ndash;&gt;-->
+<!--        <div id="menu-button" class="-mt-4 md:hidden flex mx-4">-->
+<!--            <img src="{% static './images/icons8_squared_menu_96px_1.png' %}" alt="menu" width="50" height="50">-->
+<!--        </div>-->
+<!--    </section>-->
+<!--    &lt;!&ndash; Mobile Menu &ndash;&gt;-->
+<!--    <div id="menu-area" class="md:hidden flex flex-col justify-around" style="color: white; background-color: rgba(0, 0, 0, 1); position: absolute; top: 0; left: 0; padding: 1em 2em; height: 50vh; width: 60%; margin-left: 0; border-right: 1px solid blue; border-bottom: 1px solid blue">-->
+<!--        <div class="flex flex-row gap-4 justify-around items-center self-start py-4 px-4 space-x-4">-->
+<!--            <img src="{% static './avatars/avatar.svg' %}" alt="" width="40px" height="40px">-->
+<!--            <a href="#" class="text-xl">Login</a>-->
+<!--        </div>-->
+<!--        <li style="list-style: none; border-bottom: 1px solid gray; padding-bottom: 1em;"><a href="#">Home</a></li>-->
+<!--        <li style="list-style: none; border-bottom: 1px solid gray; padding-bottom: 1em;"><a href="#">Services</a></li>-->
+<!--        <li style="list-style: none; border-bottom: 1px solid gray; padding-bottom: 1em;"><a href="#">Course</a></li>-->
+<!--        <li style="list-style: none; border-bottom: 1px solid gray; padding-bottom: 1em;"><a href="#">StudyGroups</a></li>-->
+<!--        <li style="list-style: none;"><a href="#">About</a></li>-->
+<!--    </div>-->
+<!--</header>-->
+{% endblock header %}
+
+{% block content %}
+<!--<main>-->
+<!--    <section role="banner" id="hero">-->
+<!--        <div class="bg-black text-white bg bg-no-repeat flex flex-col justify-around items-center w-full p-20 pl-0 bg-cover bg-center"-->
+<!--             style="background-image: url(../../static/images/web-3963945.jpg); background-size: 100% 100%; height: 80vh; background-position-y: 3em;">-->
+<!--            <div class="sub-hero flex flex-col items-center justify-center pl-14 md:items-start">-->
+<!--                <h1 class="text-left text-3xl text-white font-bold drop-shadow-2xl md:text-5xl md:text-left">-->
+<!--                    <span class="text-amber-500">LimCap ICT</span> BootCamp</h1>-->
+<!--                <p class="self-start w-screen md:w-9/12 mt-5 text-sm text-blue opacity-100 text-white drop-shadow-lg shadow-blue-400 md:text-lg "-->
+<!--                   style="width: 70%;">Lorem ipsum dolor, sit amet consectetur adipisicing elit.-->
+<!--                    Repudiandae laboriosam id, voluptates officiis,-->
+<!--                </p>-->
+<!--                <a href="{% url 'base:registrationPage' %}"-->
+<!--                   class="py-2 px-3 mt-4 self-start md:mt-8 md:px-12 md:py-3 text-sm bg-gradient-to-r from-amber-500 to-red-600 hover:from-amber-600 hover:to-red-700 md:text-xl text-white/70 font-semibold drop-shadow-lg rounded-full">Register-->
+<!--                    now</a>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; <img src="{% static './images/banner.jpg' %}" alt="hero" height="100"> &ndash;&gt;-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    &lt;!&ndash; Cards &ndash;&gt;-->
+<!--    <section id="card-area" class="bg-gray-950 text-white pt-1 mt-1 pb-8">-->
+<!--        <div>-->
+<!--            <h2 class="text-4xl font-extrabold text-center m-6">Our Services</h2>-->
+<!--        </div>-->
+<!--        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">-->
+<!--            <div class="cards">-->
+<!--                <img src="{% static './images/pexels-lukas-574071.jpg' %}" alt="">-->
+<!--                <h3 class="text-2xl font-bold text-center m-3">Web Development</h3>-->
+<!--                <p class="text-base text-center font-sans font-light m-3 mb-7">Lorem ipsum dolor sit amet consectetur-->
+<!--                    adipisicing elit. Omnis ipsum repellendus eligendi facere. Porro soluta in ex obcaecati, velit-->
+<!--                    assumenda modi quo. Natus distinctio ad quia perferendis voluptatum aut non vel cupiditate, fugit-->
+<!--                    itaque odio earum culpa blanditiis enim? Aperiam impedit aut numquam commodi nihil tempore vel nemo-->
+<!--                    architecto alias.</p>-->
+<!--                <a href="{% url 'base:registrationPage' %}"-->
+<!--                   class="bg-gradient-to-r from-amber-500 to-red-600 hover:from-amber-600 hover:to-red-700  px-4 py-2 my-3 rounded-full">Register-->
+<!--                    Now..</a>-->
+<!--            </div>-->
+<!--            <div class="cards">-->
+<!--                <img src="{% static './images/pexels-lukas-577210.jpg' %}" alt="">-->
+<!--                <h3 class="text-2xl font-bold text-center m-3">Data Science & Anlysis</h3>-->
+<!--                <p class="text-base text-center font-sans font-light m-3">Lorem ipsum dolor sit amet consectetur-->
+<!--                    adipisicing elit. Omnis ipsum repellendus eligendi facere. Porro soluta in ex obcaecati, velit-->
+<!--                    assumenda modi quo. Natus distinctio ad quia perferendis voluptatum aut non vel cupiditate, fugit-->
+<!--                    itaque odio earum culpa blanditiis enim? Aperiam impedit aut numquam commodi nihil tempore vel nemo-->
+<!--                    architecto alias.</p>-->
+<!--                <a href="{% url 'base:registrationPage' %}"-->
+<!--                   class="bg-gradient-to-r from-amber-500 to-red-600 hover:from-amber-600 hover:to-red-700  px-4 py-2 my-3 rounded-full">Register-->
+<!--                    Now..</a>-->
+<!--            </div>-->
+<!--            <div class="cards">-->
+<!--                <img src="{% static './images/pexels-bsm-rental-11043431.jpg' %}" alt="">-->
+<!--                <h3 class="text-2xl font-bold text-center m-3">Photography & Videography</h3>-->
+<!--                <p class="text-base text-center font-sans font-light m-3">Lorem ipsum dolor sit amet consectetur-->
+<!--                    adipisicing elit. Omnis ipsum repellendus eligendi facere. Porro soluta in ex obcaecati, velit-->
+<!--                    assumenda modi quo. Natus distinctio ad quia perferendis voluptatum aut non vel cupiditate, fugit-->
+<!--                    itaque odio earum culpa blanditiis enim? Aperiam impedit aut numquam commodi nihil tempore vel nemo-->
+<!--                    architecto alias.</p>-->
+<!--                <a href="{% url 'base:registrationPage' %}"-->
+<!--                   class="bg-gradient-to-r from-amber-500 to-red-600 hover:from-amber-600 hover:to-red-700  px-4 py-2 my-3 rounded-full">Register-->
+<!--                    Now..</a>-->
+<!--            </div>-->
+<!--            <div class="cards">-->
+<!--                <img src="{% static './images/pexels-tara-winstead-8386440.jpg' %}" alt="">-->
+<!--                <h3 class="text-2xl font-bold text-center m-3">Machine Learming</h3>-->
+<!--                <p class="text-base text-center font-sans font-light m-3">Lorem ipsum dolor sit amet consectetur-->
+<!--                    adipisicing elit. Omnis ipsum repellendus eligendi facere. Porro soluta in ex obcaecati, velit-->
+<!--                    assumenda modi quo. Natus distinctio ad quia perferendis voluptatum aut non vel cupiditate, fugit-->
+<!--                    itaque odio earum culpa blanditiis enim? Aperiam impedit aut numquam commodi nihil tempore vel nemo-->
+<!--                    architecto alias.</p>-->
+<!--                <a href="{% url 'base:registrationPage' %}"-->
+<!--                   class="bg-gradient-to-r from-amber-500 to-red-600 hover:from-amber-600 hover:to-red-700  px-4 py-2 my-3 rounded-full">Register-->
+<!--                    Now..</a>-->
+<!--            </div>-->
+<!--            <div class="cards">-->
+<!--                <img src="{% static './images/pexels-erik-mclean-4889302.jpg' %}" alt="">-->
+<!--                <h3 class="text-2xl font-bold text-center m-3">Graphics Design</h3>-->
+<!--                <p class="text-base text-center font-sans font-light m-3">Lorem ipsum dolor sit amet consectetur-->
+<!--                    adipisicing elit. Omnis ipsum repellendus eligendi facere. Porro soluta in ex obcaecati, velit-->
+<!--                    assumenda modi quo. Natus distinctio ad quia perferendis voluptatum aut non vel cupiditate, fugit-->
+<!--                    itaque odio earum culpa blanditiis enim? Aperiam impedit aut numquam commodi nihil tempore vel nemo-->
+<!--                    architecto alias.</p>-->
+<!--                <a href="{% url 'base:registrationPage' %}"-->
+<!--                   class="bg-gradient-to-r from-amber-500 to-red-600 hover:from-amber-600 hover:to-red-700  px-4 py-2 my-3 rounded-full">Register-->
+<!--                    Now..</a>-->
+<!--            </div>-->
+<!--            <div class="cards">-->
+<!--                <img src="{% static './images/works-3480187.jpg' %}" alt="">-->
+<!--                <h3 class="text-2xl font-bold text-center m-3">2D & 3D Design</h3>-->
+<!--                <p class="text-base text-center font-sans font-light m-3">Lorem ipsum dolor sit amet consectetur-->
+<!--                    adipisicing elit. Omnis ipsum repellendus eligendi facere. Porro soluta in ex obcaecati, velit-->
+<!--                    assumenda modi quo. Natus distinctio ad quia perferendis voluptatum aut non vel cupiditate, fugit-->
+<!--                    itaque odio earum culpa blanditiis enim? Aperiam impedit aut numquam commodi nihil tempore vel nemo-->
+<!--                    architecto alias.</p>-->
+<!--                <a href="{% url 'base:registrationPage' %}"-->
+<!--                   class="bg-gradient-to-r from-amber-500 to-red-600 hover:from-amber-600 hover:to-red-700  px-4 py-2 my-3 rounded-full">Register-->
+<!--                    Now..</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+<!--    <section id="FAQ-section">-->
+<!--        <div>-->
+<!--            <h2>FAQ</h2>-->
+<!--        </div>-->
+<!--        <div>-->
+
+<!--        </div>-->
+<!--    </section>-->
+<!--</main>-->
+<!--{% endblock content %}-->
+<!--{% block footer %}-->
+<!--<footer>-->
+<!--    <section class="grid grid-cols-3">-->
+<!--        <h1>footer</h1>-->
+<!--    </section>-->
+<!--</footer>-->
+<!--{% endblock footer %}-->
+<!--<script src="{% static './js/main.js' %}"></script>-->
+<!--</body>-->
+<!--</html>-->

@@ -1,0 +1,22 @@
+{% autoescape off %}
+Hello {{ user.first_name }} {{user.last_name}}!
+Thank you for registering with LimCapICT BootCamp!
+Your course of choice is {{user.course}}
+
+Here are your login details:
+username: {{ user.username }}
+password: {{ user.password }}
+
+Login with your detail provided above to activate your account
+or
+Click the link below to activate your account:
+{{ protocol }}://{{ domain }}{% url 'base:activate' uidb64=uid token=token %}
+
+You can always visit our website for more details or contact us through:
+our email: limcap2000@gmail.com
+our telephone: +234 8141795110
+
+Note: If you did not request this activation, please ignore this email.
+
+Your course is manual
+{% endautoescape %}

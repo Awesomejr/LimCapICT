@@ -1,0 +1,58 @@
+{% load static %}
+<header class="w-full bg-red-500 text-white flex content-baseline space-x-5 pt-9 px-4 fixed top-0 left-0 z-10" style="min-height: 5vh;">
+    <section class="container mx-auto flex justify-around space-x-7 md:space-x-3 md:mx-2">
+        <div class="px-5 mx-4 md:mx-6">
+            <a href="{% url 'base:home' %}" class="flex flex-row justify-around space-x-2 -mt-4">
+                <img src="{% static './images/LimCapLogo2.png' %}" alt="logo" width="55" height="55">
+                <h1 class="font-bold text-2xl mx-4 mt-2">LimCap</h1>
+            </a>
+        </div>
+        <!-- navigation menus -->
+        <nav role="navigation" class="hidden md:block md:mx-4"  id="nav-bar">
+            <ul class="md:flex flex-row justify-between space-x-8 md:mx-4">
+                <li class="hover:text-orange-600 hover:text-lg transition-all ease-linear duration-300"><a
+                        href="{% url 'base:home' %}">Home</a></li>
+                <li class="hover:text-orange-600 hover:text-lg transition-all ease-linear duration-300"><a href="#">Services</a>
+                </li>
+                <li class="hover:text-orange-600 hover:text-lg transition-all ease-linear duration-300"><a href="#">Courses</a>
+                </li>
+                <li class="hover:text-orange-600 hover:text-lg transition-all ease-linear duration-300"><a href="#">StudyGroups</a>
+                </li>
+                <li class="hover:text-orange-600 hover:text-lg transition-all ease-linear duration-300"><a
+                        href="{% url 'base:aboutPage' %}">About</a></li>
+            </ul>
+        </nav>
+        <div class="flex flex-row justify-evenly space-x-6 mx-4 ml-4 md:mx-6">
+            <!-- <a href="{% url 'base:home' %}" class="hidden md:flex bg-gradient-to-r from-amber-500 to-red-600 hover:from-amber-600 hover:to-red-700 mb-5 px-4 rounded-full">{{ request.user.username }}</a> -->
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'base:logout' %}" class="hidden md:flex text-amber-400">Logout</a>
+            <div class="hidden md:flex flex-col justify-center items-center -mt-3 md:pb-4 pt-2  w-12 h-12">
+                <a href="{% url 'base:profilePage' request.user.id %}" class="self-end"><img src="{{ request.user.avatar.url }}" alt="profile" width="32" height="32" class="w-4/5 md:w-1/2" style="border-radius: 20%;"></a>
+                <!-- <a href="#" class="font-sans font-semibold text-sm">{{ request.user.username }}</a> -->
+            </div>
+            {% else %}
+            <a href="{% url 'base:loginPage' %}" class="hidden md:flex text-amber-400">Login</a>
+            <div class="hidden md:flex flex-col justify-center items-center -mt-3 md:pb-4 pt-2  w-16">
+                <a href="{% url 'base:profilePage' request.user.id %}" class="self-end"><img src="{% static './avatars/avatar.svg' %}" alt="profile" class="w-4/5 md:w-1/2" style="border-radius: 40%;"></a>
+                <!-- <a href="#" class="font-sans font-semibold text-sm">{{ request.user.username }}</a> -->
+            </div>
+            {% endif %}
+        </div>
+        <!-- hambugger button -->
+        <button id="menu-button" class="-mt-4 md:hidden flex mx-4" onclick="openMenu()">
+            <img src="{% static './images/icons8_squared_menu_96px_1.png' %}" alt="menu" width="50" height="50">
+        </button>
+    </section>
+    <!-- Mobile Menu -->
+    <section id="menu-area" class="hidden flex-col justify-around" style="color: white; background-color: rgba(0, 0, 0, 1); position: absolute; top: 0; left: 0; z-index: 3; padding: 1em 2em; height: 50vh; width: 60%; margin-left: 0; border-right: 1px solid blue; border-bottom: 1px solid blue">
+        <div class="flex flex-row gap-4 justify-around items-center self-start py-4 px-4 space-x-4">
+            <img src="{% static './avatars/avatar.svg' %}" alt="" width="40px" height="40px">
+            <a href="#" class="text-xl">Login</a>
+        </div>
+        <li style="list-style: none; border-bottom: 1px solid gray; padding-bottom: 1em;"><a href="#">Home</a></li>
+        <li style="list-style: none; border-bottom: 1px solid gray; padding-bottom: 1em;"><a href="#">Services</a></li>
+        <li style="list-style: none; border-bottom: 1px solid gray; padding-bottom: 1em;"><a href="#">Course</a></li>
+        <li style="list-style: none; border-bottom: 1px solid gray; padding-bottom: 1em;"><a href="#">StudyGroups</a></li>
+        <li style="list-style: none;"><a href="#">About</a></li>
+    </section>
+</header>

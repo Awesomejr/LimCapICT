@@ -1,0 +1,58 @@
+
+.current {
+  color: green;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+li{
+  list-style: none;
+}
+
+.sub-hero{
+  margin-right: 50%;
+}
+
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 1em 3em;
+}
+
+.cards a {
+  justify-self: center;
+}
+
+.cards:hover {
+    box-shadow: 0.5em 0.5em 2em lightgrey;
+    transform: scale(1.03, 1.03);
+  }
+
+  .cards img {
+    transition-property: all;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+  }
+  
+  .cards img:hover {
+    transform: scale(1.05, 1.05);
+    /* transform: rotate(360deg); */
+    transform: skew(30deg, -30deg);
+  }
+
+  .menu-area{
+    background-color: blue;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100vh;
+
+  }
+
+  .show {
+    display: none;
+  }

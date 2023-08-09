@@ -1,0 +1,18 @@
+{% load static %}
+<section role="banner" id="hero">
+    <div class="bg-black text-white bg bg-no-repeat flex flex-col justify-around items-center w-full p-20 pl-0 bg-cover bg-center"
+         style="background-image: url(../../static/images/web-3963945.jpg); background-size: 100% 100%; height: 80vh;">
+        <div class="sub-hero flex flex-col items-center justify-center pl-14 md:items-start">
+            <h1 class="text-left text-3xl text-white font-bold drop-shadow-2xl md:text-5xl md:text-left">
+                <span class="text-amber-500">LimCapICT</span> BootCamp</h1>
+            <p class="self-start w-screen md:w-9/12 mt-5 text-sm text-blue opacity-100 text-white drop-shadow-lg shadow-blue-400 md:text-lg "
+               style="width: 70%;">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Repudiandae laboriosam id, voluptates officiis,
+            </p>
+            <a href="{% url 'base:registrationPage' %}"
+               class="py-2 px-3 mt-4 self-start md:mt-8 md:px-12 md:py-3 text-sm bg-gradient-to-r from-amber-500 to-red-600 hover:from-amber-600 hover:to-red-700 md:text-xl text-white/70 font-semibold drop-shadow-lg rounded-full">Register
+                now</a>
+        </div>
+        <!-- <img src="{% static './images/banner.jpg' %}" alt="hero" height="100"> -->
+    </div>
+</section>

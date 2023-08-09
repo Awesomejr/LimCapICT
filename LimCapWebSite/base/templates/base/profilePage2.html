@@ -1,0 +1,67 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block title %} LimCap ICT | Profile Edit {% endblock title %}
+
+{% block content %}
+<main class="flex flex-col items-center justify-center w-full min-h-screen bg-black bg-center bg-no-repeat bg-cover"
+style="background-image: url(../../static/images/camera-1130731.jpg)">
+    <div class="flex items-center justify-center mt-4">
+        <img src="{{ request.user.avatar.url }}" width="100px" height="100px"
+                style="border-radius: 50%; height: 200px; width: 200px">
+    </div>
+    <form role="form" method="post" enctype="multipart/form-data" class="grid items-center justify-around w-4/5 grid-cols-2 py-4 my-32 space-y-4 text-black bg-lightBlack md:px-0 md:my-36 lg:my-32 rounded-2xl">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label for="{{ form.first_name.id_for_label }}" class="block text-white">{{form.first_name.label}} <span class="text-brightRed">*</span> </label>
+            {{ form.first_name }}
+        </div>
+        <div class="mb-4">
+            <label for="{{ form.last_name.id_for_label }}" class="block text-white">{{form.last_name.label}} <span class="text-brightRed">*</span></label>
+            {{ form.last_name }}
+        </div>
+        <div class="mb-4">
+            <label for="{{ form.gender.id_forlabel }}" class="block text-white">{{form.gender.label}} <span class="text-brightRed">*</span></label>
+            {{ form.gender }}
+        </div>
+        <div class="mb-4">
+            <label for="{{ form.course.id_forlabel }}" class="block text-white">{{form.course.label}} <span class="text-brightRed">*</span></label>
+            <select name="{{ form.course.name }}" class="form-select" style="min-width: 80%;">
+                <option value="" >Select a course</option>
+                {% for course in courses %}
+                <option value="{{ course }}" {% if course == user.course %}
+                selected
+                {% endif %}>{{ course }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 md:gap-8">
+            <div class="">
+                <label for="{{ form.countryCode.id_for_label }}" class="block w-10 text-white">{{form.countryCode.label}}</label>
+                {{ form.countryCode }}
+            </div>
+            <div class="w-full pr-20 md:-ml-16 lg:-ml-36">
+                <label for="{{ form.phoneNumber.id_for_label }}" class="block text-white">{{form.phoneNumber.label}} <span class="text-brightRed">*</span></label>
+                {{ form.phoneNumber }}
+            </div>
+        </div>
+        <div class="mb-4">
+            <label for="{{ form.email.id_for_label }}" class="block text-white">{{form.email.label}} <span class="text-brightRed">*</span></label>
+            {{ form.email }}
+        </div>
+        <div class="mb-4">
+            <label for="{{ form.username.id_for_label }}" class="block text-white">{{form.username.label}} <span class="text-brightRed">*</span> </label>
+            {{ form.username }}
+        </div>
+        <div class="mb-4">
+            <label for="{{ form.avatar.id_for_label }}" class="block text-white">{{form.avatar.label}}</label>
+            {{ form.avatar }}
+        </div>
+    
+        <button type="submit" id="saveButton" class="flex flex-col items-center self-end justify-between p-2 rounded-xl lg:col-span-2 lg:self-start" style="background-color: rgb(3, 109, 3); width: 10%;">
+            <img src="{% static './images/285657_floppy_guardar_save_icon.svg' %}" alt="none" width="40">
+            Save
+        </button>
+    </form>
+</main>
+{% endblock content %}
