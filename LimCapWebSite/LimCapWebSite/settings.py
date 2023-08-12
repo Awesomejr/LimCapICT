@@ -93,25 +93,25 @@ WSGI_APPLICATION = 'LimCapWebSite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-pymysql.install_as_MySQLdb()
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'limcapict_database',
-        'USER': "root",
-        'PASSWORD': "awesomejr949412345",
-        'HOST': 'localhost',  # Use '127.0.0.1' if needed
-        'PORT': '3306',       # Default MySQL port
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# pymysql.install_as_MySQLdb()
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'limcapict_database',
+#         'USER': "root",
+#         'PASSWORD': "awesomejr949412345",
+#         'HOST': 'localhost',  # Use '127.0.0.1' if needed
+#         'PORT': '3306',       # Default MySQL port
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
