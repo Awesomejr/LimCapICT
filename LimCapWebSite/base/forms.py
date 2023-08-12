@@ -122,3 +122,15 @@ class UserProfileForm(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'gender', 'course', 'email', 'countryCode', 'phoneNumber', 'username',
                   'avatar', 'bio']
+
+
+class CoursePaymentForm(forms.ModelForm):
+    userId = forms.IntegerField(max_value=1000, required=True)
+    username = forms.CharField(label="username", required=True)
+    firstName = forms.CharField(label="First Name", min_length=3, required=True)
+    lastName = forms.CharField(label="Last Name", min_length=3, required=True)
+    email = forms.EmailField(label="Email", required=True)
+    phoneNumber = forms.CharField(label="Phone Number", min_length=6, max_length=14, required=True)
+    course = forms.CharField(label="Course", required=True)
+    description = forms.CharField(label="Description", required=True)
+    amount = forms.CharField(label="Price", required=True)

@@ -1,7 +1,11 @@
 import os
-
+import requests
+import math
+import random
+from decouple import config
 
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
 from django.contrib.auth.tokens import default_token_generator
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
@@ -17,7 +21,7 @@ from django.core.mail import EmailMessage
 from typing import Protocol
 from django.conf import settings
 
-from .forms import UserRegistrationForm, UserProfileForm
+from .forms import UserRegistrationForm, UserProfileForm, CoursePaymentForm
 from .models import Course, User
 from .tokens import account_activation_token
 
@@ -74,7 +78,7 @@ def activateEmail(request, user, to_email):
 
 
 def registerPage(request):
-    courses = Course.objects.all()
+    courses = Course.objects.all().order_by("name")
 
     if request.method == "POST":
         form = UserRegistrationForm(request.POST, request.FILES)
@@ -84,6 +88,7 @@ def registerPage(request):
             user.username = user.username.lower()
             user.first_name = user.first_name.capitalize()
             user.last_name = user.last_name.capitalize()
+            user.course = user.course.title()
             user.save()
             login(request, user)
             print("here")
@@ -164,6 +169,71 @@ def profilePage(request, pk):
 
     context = {"courses": course, "form": form, "user": user}
     return render(request, './base/profilePage.html', context=context)
+
+def purchaseCourse(request, pk):
+    user = request.user
+    data = Course.objects.get(id=pk)
+
+    if request.method == "POST":
+        form = CoursePaymentForm(request.POST)
+        if form.is_valid():
+            userId = form.cleaned_data["userId"]
+            username = form.cleaned_data["username"]
+            firstName = form.cleaned_data["firstName"]
+            lastName = form.cleaned_data["lastName"]
+            email = form.cleaned_data["email"]
+            phoneNumber = form.cleaned_data["phoneNumber"]
+            course = form.cleaned_data["course"]
+            description = form.cleaned_data["description"]
+            amount = form.cleaned_data["amount"]
+            return redirect(processPayment(userId, username, firstName, lastName, email, phoneNumber, course, description, amount))
+        else:
+            form = CoursePaymentForm()
+
+    context={"courseToPurchase": data, "form": form}
+    return render(request, './base/paymentForm.html', context=context)
+
+def processPayment(userId, username, firstName, lastName, email, phoneNumber, course, description, amount):
+     auth_token= config('SECRET_KEY')
+     hed = {'Authorization': 'Bearer ' + auth_token}
+     data = {
+                "tx_ref":''+str(math.floor(1000000 + random.random()*9000000)),
+                "amount":amount,
+                "currency":"NGN",
+                "redirect_url":"https://127.0.0.1:8000/confirmPayment/" + userId,
+                "payment_options":"card",
+                "meta":{
+                    "consumer_id":userId,
+                    "consumer_mac":"92a3-912ba-1192a"
+                },
+                "customer":{
+                    "email":email,
+                    "phonenumber":phoneNumber,
+                    "name": username
+                },
+                "customizations":{
+                    "title":"LimCapICT BootCamp",
+                    "description": description,
+                    "logo":"https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg"
+                }
+                }
+     url = ' https://api.flutterwave.com/v3/payments'
+     response = requests.post(url, json=data, headers=hed)
+     response=response.json()
+     link=response['data']['link']
+     return link
+
+@require_http_methods(['GET', 'POST'])
+def confirmPayment(request):
+    status = request.GET.get("status", None)
+    tex_ref = request.GET.get("tx_ref", None)
+
+    user = User.objects.get(pk=id)
+    user.paymentStatus = "Paid"
+    user.save()
+    messages = f"{status}!!! \nCongratulation {user.first_name} {user.last_name}! Your payment was successful."
+    messages.success(request, messages)
+    return redirect("base:profilePage", pk=user.id)
 
 
 def aboutPage(request):

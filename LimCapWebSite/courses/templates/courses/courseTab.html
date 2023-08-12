@@ -1,0 +1,50 @@
+{% load static %}
+<div class="border-b border-gray-200 dark:border-gray-700 bg-gray-900">
+   <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-white" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+       <li class="mr-2" role="presentation">
+            <button class="inline-block p-4 border-b-2 rounded-t-lg" id="webDesign-tab" data-tabs-target="#webDesign" type="button" role="tab" aria-controls="webDesign" aria-selected="false">Web Design</button>
+       </li>
+       <li class="mr-2" role="presentation">
+           <button class="inline-block p-4 border-b-2 rounded-t-lg" id="webDevelopment-tab" data-tabs-target="#webDevelopment" type="button" role="tab" aria-controls="webDevelopment" aria-selected="false">Web Development</button>
+       </li>
+       <li class="mr-2" role="presentation">
+           <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dataScience-tab" data-tabs-target="#dataScience" type="button" role="tab" aria-controls="dataScience" aria-selected="false">Data Science and Analysis</button>
+       </li>
+       <li class="mr-2" role="presentation">
+           <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="machineLearning-tab" data-tabs-target="#machineLearning" type="button" role="tab" aria-controls="machineLearning" aria-selected="false">Machine Learning</button>
+       </li>
+       <li role="presentation">
+           <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="artificialIntelligence-tab" data-tabs-target="#artificialIntelligence" type="button" role="tab" aria-controls="artificialIntelligence" aria-selected="false">Artificial Intelligence</button>
+       </li>
+       <li role="presentation">
+         <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="GraphicsDesign-tab" data-tabs-target="#GraphicsDesign" type="button" role="tab" aria-controls="GraphicsDesign" aria-selected="false">Graphics Design</button>
+     </li>
+   </ul>
+</div>
+
+<!-- tab contents -->
+<div id="myTabContent">
+
+   <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="webDesign" role="tabpanel" aria-labelledby="webDesign-tab">
+      <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Web design tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+  </div>
+
+   {% include "courses/webDevelopmentCourse.html" %}
+
+   <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dataScience" role="tabpanel" aria-labelledby="dataScience-tab">
+       <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Data Science and analysis tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+   </div>
+
+   <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="machineLearning" role="tabpanel" aria-labelledby="machineLearning-tab">
+       <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">machine Learning tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+   </div>
+
+   <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="artificialIntelligence" role="tabpanel" aria-labelledby="artificialIntelligence-tab">
+       <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Artificial Intelligence tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+   </div>
+
+   <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="GraphicsDesign" role="tabpanel" aria-labelledby="GraphicsDesign-tab">
+      <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Artificial Intelligence tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+  </div>
+
+</div>

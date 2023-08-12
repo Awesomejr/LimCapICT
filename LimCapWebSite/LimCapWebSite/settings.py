@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from decouple import config
+import pymysql
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,9 +44,10 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',
-    # 'compressor',
+    'corsheaders',
 
-    'base',
+    'base.apps.BaseConfig',
+    'courses.apps.CoursesConfig',
 ]
 
 AUTH_USER_MODEL = "base.User"
@@ -60,6 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     "django_browser_reload.middleware.BrowserReloadMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'LimCapWebSite.urls'
@@ -90,10 +93,23 @@ WSGI_APPLICATION = 'LimCapWebSite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+pymysql.install_as_MySQLdb()
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'limcapict_database',
+        'USER': "root",
+        'PASSWORD': "awesomejr949412345",
+        'HOST': 'localhost',  # Use '127.0.0.1' if needed
+        'PORT': '3306',       # Default MySQL port
     }
 }
 
@@ -132,11 +148,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = "/avatars/"
 
-STATIC_FILES_DIR = [
-    BASE_DIR / "static",
-    # os.path.join(BASE_DIR, 'node_modules/flowbite/dist'),
-]
-
+STATIC_FILES_DIR = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", 'static')
+ 
 MEDIA_ROOT = BASE_DIR / "base/static/avatars"
 
 # Default primary key field type
@@ -164,6 +178,10 @@ EMAIL_USE_TLS = True
 PASSWORD_RESET_TIMEOUT = 14400
 # EMAIL_USE_SSL = False
 
+CORS_ALLOWED_ORIGINS = [
+    "https://checkout-v3-ui-prod.f4b-flutterwave.com",
+]
+# CORS_ALLOW_ALL_ORIGINS = True
 
 JAZZMIN_SETTINGS = {
     "site_header": "LimCapICT",
@@ -185,7 +203,7 @@ JAZZMIN_SETTINGS = {
     # Whether to aut expand the menu
     "navigation_expanded": True,
     # Hide these apps when generating side menu e.g (auth)
-    "hide_apps": ["auth"],
+    # "hide_apps": ["auth"],
     # Hide these models when generating side menu (e.g auth.user)
     "hide_models": [],
 
