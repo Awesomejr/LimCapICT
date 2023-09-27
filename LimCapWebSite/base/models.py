@@ -19,28 +19,31 @@ countryCodeList = [
 class Course(models.Model):
     name = models.CharField(max_length=50)
     price = models.CharField(max_length=20, default="0")
-    
+    description = models.TextField(default="Not Available")
+
     created_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.name}"
-    
+
 
 class User(AbstractUser):
     gender = models.CharField(max_length=10, null=False, choices=genders)
     course = models.CharField(null=False, max_length=50)
+    # course = models.ForeignKey(Course, on_delete=models.PROTECT)
     countryCode = models.CharField(max_length=5, null=False, choices=countryCodeList)
     phoneNumber = models.CharField(max_length=12)
     email = models.EmailField(max_length=50, null=False, unique=True)
     bio = models.TextField(null=True, blank=True)
     avatar = models.ImageField(default="avatar.svg", blank=True, null=True)
     paymentStatus = models.CharField(max_length=20, default="Not paid", null=False)
-    
+
     created_on = models.DateTimeField(auto_now=True)
     updated_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.username
+
 
 class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="messages")
@@ -62,5 +65,3 @@ class StudyGroup(models.Model):
 
     def __str__(self):
         return f"{self.name} hosted by {self.host}"
-
-

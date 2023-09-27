@@ -7,13 +7,12 @@
     {% include "base/banner2.html" %}
     {% include "base/backToTop.html" %}
     {% include "base/homePageCards.html" %}
-    {% include "base/paymentForm.html" %}
     <section id="FAQ-section">
         <div>
             <h2>FAQ</h2>
         </div>
         <div>
-
+            <a href="{% url 'base:purchaseCourse' request.user.id %}">Purchase Course</a>
         </div
     </section>
 </main>

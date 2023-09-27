@@ -171,27 +171,42 @@ def profilePage(request, pk):
     return render(request, './base/profilePage.html', context=context)
 
 def purchaseCourse(request, pk):
-    user = request.user
-    data = Course.objects.get(id=pk)
+    user = User.objects.get(id=pk)
+    course = Course.objects.get(id=pk)
+
+    # Prefill form with user details and course information
+    initialData = {
+        "userId": user.id,
+        "username": user.username,
+        "firstName": user.first_name,
+        "lastName": user.last_name,
+        "email": user.email,
+        "phoneNumber": user.phoneNumber,
+        "description": course.description,
+        "amount": course.price,
+    }
+    form = CoursePaymentForm(initial=initialData)
 
     if request.method == "POST":
         form = CoursePaymentForm(request.POST)
         if form.is_valid():
-            userId = form.cleaned_data["userId"]
-            username = form.cleaned_data["username"]
-            firstName = form.cleaned_data["firstName"]
-            lastName = form.cleaned_data["lastName"]
-            email = form.cleaned_data["email"]
-            phoneNumber = form.cleaned_data["phoneNumber"]
-            course = form.cleaned_data["course"]
-            description = form.cleaned_data["description"]
-            amount = form.cleaned_data["amount"]
-            return redirect(processPayment(userId, username, firstName, lastName, email, phoneNumber, course, description, amount))
-        else:
-            form = CoursePaymentForm()
-
-    context={"courseToPurchase": data, "form": form}
-    return render(request, './base/paymentForm.html', context=context)
+            # Retrieve cleaned data from the form
+            cleaned_data = form.cleaned_data
+            userId = user.id
+            username = user.username
+            firstName = cleaned_data["firstName"]
+            lastName = cleaned_data["lastName"]
+            email = cleaned_data["email"]
+            phoneNumber = cleaned_data["phoneNumber"]
+            description = cleaned_data["description"]
+            amount = cleaned_data["amount"]
+            
+            # Process the payment and redirect to a success page
+            processPayment(userId, username, firstName, lastName, email, phoneNumber, course, description, amount)
+            return redirect('payment_success')  # Redirect to a URL or view name
+            
+    context = {"courseToPurchase": course, "form": form}
+    return render(request, './base/coursePaymentPage.html', context=context)
 
 def processPayment(userId, username, firstName, lastName, email, phoneNumber, course, description, amount):
      auth_token= config('SECRET_KEY')
@@ -209,7 +224,7 @@ def processPayment(userId, username, firstName, lastName, email, phoneNumber, co
                 "customer":{
                     "email":email,
                     "phonenumber":phoneNumber,
-                    "name": username
+                    "name": f"{firstName} {lastName} @{username}"
                 },
                 "customizations":{
                     "title":"LimCapICT BootCamp",

@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+from .models import User, Course
 from django.contrib.auth.forms import UserCreationForm
 from .models import genders, countryCodeList
 
@@ -125,12 +125,16 @@ class UserProfileForm(forms.ModelForm):
 
 
 class CoursePaymentForm(forms.ModelForm):
-    userId = forms.IntegerField(max_value=1000, required=True)
-    username = forms.CharField(label="username", required=True)
+    class Meta:
+        model = Course
+        fields = []  # Specify the fields you want to include in the form
+
+    userId = forms.CharField(max_length=1000, required=True)
+    username = forms.CharField(label="Username", required=True)
     firstName = forms.CharField(label="First Name", min_length=3, required=True)
     lastName = forms.CharField(label="Last Name", min_length=3, required=True)
     email = forms.EmailField(label="Email", required=True)
     phoneNumber = forms.CharField(label="Phone Number", min_length=6, max_length=14, required=True)
-    course = forms.CharField(label="Course", required=True)
     description = forms.CharField(label="Description", required=True)
-    amount = forms.CharField(label="Price", required=True)
+    amount = forms.DecimalField(label="Price", required=True, max_digits=10, decimal_places=2)
+    course = forms.ModelChoiceField(queryset=Course.objects.all(), empty_label=None, label="Course", required=True)
